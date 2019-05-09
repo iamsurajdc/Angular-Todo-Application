@@ -11,12 +11,31 @@ import { TodoService } from '../../services/todo.service';
 export class TodosComponent implements OnInit {
   todos: Todo[];
 
-  constructor(private todoservice: TodoService) { 
+  constructor(private todoservice: TodoService) {
    
   }
 
   ngOnInit() {
-    this.todos = this.todoservice.getTodos();
+    this.todoservice.getTodos().subscribe(r => {
+      this.todos = r;
+			console.log("TCL: TodosComponent -> ngOnInit -> todos", this.todos)
+    });
+  }
+  deleteTodo(todo: Todo) {
+		console.log("TCL: TodosComponent -> deleteTodo -> todo", todo)
+    // Remove From UI
+    this.todos = this.todos.filter(t => t.id !== todo.id);
+    // Remove from server
+    this.todoservice.deleteTodo(todo).subscribe();
   }
 
-}
+  addTodo(todo: Todo) {
+    this.todoservice.addTodo(todo).subscribe((td: any) => {
+			console.log("TCL: TodosComponent -> addTodo -> td", td)
+      this.todos.push((td));
+      // this.todoservice.getTodos().subscribe(r => {
+      //   this.todos = r;});
+    })
+  }
+
+  }
