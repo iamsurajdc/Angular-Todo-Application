@@ -3,7 +3,7 @@ addons:
   chrome: stable
 language: node_js
 node_js:
-  - "12.2"
+  - "12.2.0"
 script: echo "Running tests against $(node -v) ..."
 cache: 
     - npm
@@ -15,7 +15,7 @@ branches:
 before_install: echo "Before Dependancy Install By Suraj..."
 
 before_script: 
-    - npm install -g @angular/cli@7
+    - npm install -g @angular/cli
     - npm install -g firebase-tools 
 
 script: 
