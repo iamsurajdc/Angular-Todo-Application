@@ -1,0 +1,27 @@
+sudo: required
+addons: 
+  chrome: stable
+language: node_js
+node_js:
+  - "12"
+script: echo "Running tests against $(node -v) ..."
+cache: 
+    - npm
+
+branches: 
+ - only:
+    - master
+
+before_install: echo "Before Dependancy Install By Suraj..."
+
+before_script: 
+    - npm install -g @angular/cli@7
+    - npm install -g firebase-tools 
+
+script: 
+  - npm install
+  - ng build --prod
+
+after_script: echo "Winjit Build Succeded "
+after_success: 
+  - firebase deploy --token $FIREBASE_TOKEN
