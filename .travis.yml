@@ -21,7 +21,6 @@ before_script:
 script: 
   - npm install
   - ng build --prod
-
-after_script: echo "Winjit Build Succeded "
 after_success: 
+  - script: echo "Winjit Build Succeeded"
   - firebase deploy --token $FIREBASE_TOKEN
